@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All Projects — Danish Sayyed</title>
+<meta name="description" content="All data analytics projects by Danish Sayyed — Tableau dashboards, Power BI reports, Python analyses and more.">
+<link rel="icon" href="./assets/images/logo.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./assets/css/style.css">
+<script type="module" src="https://cdn.jsdelivr.net/npm/[email protected]/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://cdn.jsdelivr.net/npm/[email protected]/dist/ionicons/ionicons.js"></script>
+</head>
+<body>
+
+<div class="nav-wrap">
+  <nav class="nav">
+    <a href="index.html#home" class="nav-brand"><span class="dot"></span> Danish Sayyed</a>
+    <ul class="nav-links">
+      <li><a href="index.html#home" class="nav-link">Home</a></li>
+      <li><a href="index.html#about" class="nav-link">About</a></li>
+      <li><a href="index.html#career" class="nav-link">Career</a></li>
+      <li><a href="index.html#projects" class="nav-link active">Projects</a></li>
+      <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+    </ul>
+    <a href="index.html#contact" class="btn btn-primary nav-cta">Say hello <ion-icon name="arrow-forward-outline"></ion-icon></a>
+    <button class="nav-toggle" aria-label="Menu"><span></span></button>
+  </nav>
+  <ul class="mobile-drawer">
+    <li><a href="index.html#home">Home</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#career">Career</a></li>
+    <li><a href="index.html#projects">Projects</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</div>
+
+<main>
+  <section class="page-hero">
+    <div class="wrap">
+      <a href="index.html#projects" class="back-link" data-reveal><ion-icon name="arrow-back-outline"></ion-icon> Back to home</a>
+      <div data-reveal>
+        <div class="eyebrow"><span class="line"></span> ALL PROJECTS</div>
+        <h1>My complete project library.</h1>
+        <p>Every dashboard, viz and analysis I've built — across cricket, business and real-world datasets. Use the filters or search to find something specific.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:26px;">
+    <div class="wrap">
+      <div class="filter-bar" data-reveal="scale">
+        <div class="filter-row">
+          <button class="filter-chip" data-cat="all">All</button>
+          <button class="filter-chip" data-cat="tableau-dashboards">Tableau Dashboards</button>
+          <button class="filter-chip" data-cat="tableau-vizzes">Tableau Vizzes</button>
+          <button class="filter-chip" data-cat="power-bi">Power BI</button>
+          <button class="filter-chip" data-cat="python">Python</button>
+          <button class="filter-chip" data-cat="excel">Excel</button>
+          <button class="filter-chip" data-cat="others">Others</button>
+        </div>
+        <div class="search-box">
+          <ion-icon name="search-outline"></ion-icon>
+          <input type="text" data-project-search placeholder="Search projects...">
+        </div>
+      </div>
+
+      <div class="projects-count-row" data-reveal>
+        <h3 data-result-count>44 projects</h3>
+      </div>
+
+      <div class="project-grid" data-project-grid></div>
+      <p class="results-empty" data-empty-state style="display:none;">No projects match that search — try a different keyword or filter.</p>
+
+      <div class="load-more-wrap">
+        <button class="btn btn-ghost" data-load-more>Load more projects <ion-icon name="add-outline"></ion-icon></button>
+      </div>
+
+      <div class="connect-strip" data-reveal="scale">
+        <div class="connect-strip-left">
+          <div class="ic"><ion-icon name="bulb-outline"></ion-icon></div>
+          <div><h5>Have an idea, dataset or collaboration in mind?</h5><span>I'm always open to interesting projects and conversations.</span></div>
+        </div>
+        <a href="index.html#contact" class="btn btn-primary">Let's connect <ion-icon name="arrow-forward-outline"></ion-icon></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>© <span id="year"></span> Danish Sayyed. Built with data, curiosity and a lot of cups of chai.</p>
+</footer>
+
+<button class="to-top" aria-label="Back to top"><ion-icon name="arrow-up-outline"></ion-icon></button>
+
+<!-- ============ PROJECT PREVIEW MODAL ============ -->
+<div class="preview-overlay">
+  <div class="preview-box">
+    <button class="preview-close" aria-label="Close"><ion-icon name="close-outline"></ion-icon></button>
+    <div class="preview-thumb"><img src="" alt=""></div>
+    <div class="preview-info">
+      <div class="preview-tags"></div>
+      <h4></h4>
+      <p></p>
+      <div class="preview-actions">
+        <a href="#" target="_blank" rel="noopener" class="btn btn-dark" data-preview-view>View Full Project <ion-icon name="open-outline"></ion-icon></a>
+        <a href="#" target="_blank" rel="noopener" class="btn btn-ghost" data-preview-github><ion-icon name="logo-github"></ion-icon> View on GitHub</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="./assets/js/projects-data.js"></script>
+<script src="./assets/js/main.js"></script>
+<script src="./assets/js/projects-page.js"></script>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
