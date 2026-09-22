@@ -681,3 +681,14 @@ footer{ text-align:center; padding:34px 20px 44px; color:var(--ink-400); font-si
 .back-link{ display:inline-flex; align-items:center; gap:6px; font-size:.86rem; font-weight:600; color:var(--ink-500); margin-bottom:18px; }
 .back-link:hover{ color:var(--ink-900); }
 .results-empty{ text-align:center; padding:60px 20px; color:var(--ink-400); font-size:.95rem; }
+
+.testi-featured {
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.testi-featured.testi-animating {
+  opacity: 0;
+  transform: translateX(25px);
+}
