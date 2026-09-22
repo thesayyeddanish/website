@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* =========================================================
-     TESTIMONIALS CAROUSEL (1 item at a time, looping)
+     TESTIMONIALS CAROUSEL (1 item at a time with sliding animation)
      Requires TESTIMONIALS array (assets/js/testimonials-data.js)
   ========================================================= */
   const testiRoot = document.querySelector('[data-testimonials]');
@@ -137,7 +137,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const prevBtn = testiRoot.querySelector('[data-testi-prev]');
     const nextBtn = testiRoot.querySelector('[data-testi-next]');
 
-    // Hide the old small-pair container since we are showing 1 large card at a time
     if (pairWrap) pairWrap.style.display = 'none';
 
     let currentIndex = 0;
@@ -159,31 +158,52 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       </div>`;
 
-    const render = () => {
+    const render = (initial = false) => {
       const t = TESTIMONIALS[currentIndex];
-      featuredWrap.innerHTML = renderFeatured(t);
-      // Generate 7 dots (one for each recommendation)
-      dotsWrap.innerHTML = TESTIMONIALS.map((_, i) => `<span class="${i === currentIndex ? 'active' : ''}"></span>`).join('');
-      [...featuredWrap.parentElement.querySelectorAll('[data-reveal]')].forEach(el => el.classList.add('in-view'));
+      if (initial) {
+        featuredWrap.innerHTML = renderFeatured(t);
+        updateDots();
+        return;
+      }
+
+      // Trigger slide out animation
+      featuredWrap.classList.add('testi-animating');
+
+      setTimeout(() => {
+        featuredWrap.innerHTML = renderFeatured(t);
+        updateDots();
+        [...featuredWrap.parentElement.querySelectorAll('[data-reveal]')].forEach(el => el.classList.add('in-view'));
+        // Slide back in
+        featuredWrap.classList.remove('testi-animating');
+      }, 200);
     };
-    render();
+
+    const updateDots = () => {
+      dotsWrap.innerHTML = TESTIMONIALS.map((_, i) => `<span class="${i === currentIndex ? 'active' : ''}"></span>`).join('');
+    };
+
+    // Initial load without delay
+    render(true);
+
+    const goToSlide = (newIndex) => {
+      if (newIndex === currentIndex) return;
+      currentIndex = newIndex;
+      render();
+    };
 
     prevBtn?.addEventListener('click', () => { 
-      currentIndex = (currentIndex - 1 + TESTIMONIALS.length) % TESTIMONIALS.length; 
-      render(); 
+      goToSlide((currentIndex - 1 + TESTIMONIALS.length) % TESTIMONIALS.length); 
     });
     
     nextBtn?.addEventListener('click', () => { 
-      currentIndex = (currentIndex + 1) % TESTIMONIALS.length; 
-      render(); 
+      goToSlide((currentIndex + 1) % TESTIMONIALS.length); 
     });
 
     dotsWrap?.addEventListener('click', (e) => {
       const dots = [...dotsWrap.children];
       const idx = dots.indexOf(e.target);
       if (idx > -1) { 
-        currentIndex = idx; 
-        render(); 
+        goToSlide(idx); 
       }
     });
   }
