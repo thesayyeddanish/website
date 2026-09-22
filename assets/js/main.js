@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* =========================================================
-     TESTIMONIALS CAROUSEL (paginated, groups of 3)
+     TESTIMONIALS CAROUSEL (1 item at a time, looping)
      Requires TESTIMONIALS array (assets/js/testimonials-data.js)
   ========================================================= */
   const testiRoot = document.querySelector('[data-testimonials]');
@@ -137,11 +137,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const prevBtn = testiRoot.querySelector('[data-testi-prev]');
     const nextBtn = testiRoot.querySelector('[data-testi-next]');
 
-    const pages = [];
-    for (let i = 0; i < TESTIMONIALS.length; i += 3) pages.push(TESTIMONIALS.slice(i, i + 3));
-    let page = 0;
+    // Hide the old small-pair container since we are showing 1 large card at a time
+    if (pairWrap) pairWrap.style.display = 'none';
 
-    const li = (name) => `https://www.linkedin.com/in/thesayyeddanish`; // profile page (individual reviewer links not published)
+    let currentIndex = 0;
 
     const renderFeatured = (t) => `
       <div class="testi-quote-mark">&rdquo;</div>
@@ -160,36 +159,32 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       </div>`;
 
-    const renderSmall = (t) => `
-      <div class="testi-small-card">
-        <div class="testi-small-top">
-          <img class="testi-small-avatar" src="${t.img}" alt="${t.name}">
-          <div>
-            <h5>${t.name}</h5>
-            <div class="role">${t.role}</div>
-          </div>
-        </div>
-        <p>&ldquo;${t.full}&rdquo;</p>
-      </div>`;
-
     const render = () => {
-      const set = pages[page];
-      featuredWrap.innerHTML = renderFeatured(set[0]);
-      pairWrap.innerHTML = set.slice(1).map(renderSmall).join('');
-      pairWrap.style.display = set.length > 1 ? 'grid' : 'none';
-      if (set.length === 2) pairWrap.style.gridTemplateColumns = '1fr';
-      else pairWrap.style.gridTemplateColumns = '1fr 1fr';
-      dotsWrap.innerHTML = pages.map((_, i) => `<span class="${i === page ? 'active' : ''}"></span>`).join('');
+      const t = TESTIMONIALS[currentIndex];
+      featuredWrap.innerHTML = renderFeatured(t);
+      // Generate 7 dots (one for each recommendation)
+      dotsWrap.innerHTML = TESTIMONIALS.map((_, i) => `<span class="${i === currentIndex ? 'active' : ''}"></span>`).join('');
       [...featuredWrap.parentElement.querySelectorAll('[data-reveal]')].forEach(el => el.classList.add('in-view'));
     };
     render();
 
-    prevBtn?.addEventListener('click', () => { page = (page - 1 + pages.length) % pages.length; render(); });
-    nextBtn?.addEventListener('click', () => { page = (page + 1) % pages.length; render(); });
+    prevBtn?.addEventListener('click', () => { 
+      currentIndex = (currentIndex - 1 + TESTIMONIALS.length) % TESTIMONIALS.length; 
+      render(); 
+    });
+    
+    nextBtn?.addEventListener('click', () => { 
+      currentIndex = (currentIndex + 1) % TESTIMONIALS.length; 
+      render(); 
+    });
+
     dotsWrap?.addEventListener('click', (e) => {
       const dots = [...dotsWrap.children];
       const idx = dots.indexOf(e.target);
-      if (idx > -1) { page = idx; render(); }
+      if (idx > -1) { 
+        currentIndex = idx; 
+        render(); 
+      }
     });
   }
 
