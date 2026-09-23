@@ -9,8 +9,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./assets/css/style.css">
-<script type="module" src="https://cdn.jsdelivr.net/npm/[email protected]/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://cdn.jsdelivr.net/npm/[email protected]/dist/ionicons/ionicons.js"></script>
+<script type="module" src="https://unpkg.com/[email protected]/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/[email protected]/dist/ionicons/ionicons.js"></script>
 </head>
 <body>
 
@@ -18,6 +18,7 @@
   <nav class="nav">
     <a href="index.html#home" class="nav-brand"><span class="dot"></span> Danish Sayyed</a>
     <ul class="nav-links">
+      <li class="nav-indicator" aria-hidden="true"></li>
       <li><a href="index.html#home" class="nav-link">Home</a></li>
       <li><a href="index.html#about" class="nav-link">About</a></li>
       <li><a href="index.html#career" class="nav-link">Career</a></li>
@@ -89,6 +90,12 @@
 </main>
 
 <footer>
+  <div class="footer-stream" aria-hidden="true">
+    <div class="footer-stream-track">
+      <span>01</span><span>101</span><span>42.3</span><span>SQL</span><span>220+</span><span>Tableau</span><span>0.82</span><span>LIVE</span>
+      <span>01</span><span>101</span><span>42.3</span><span>SQL</span><span>220+</span><span>Tableau</span><span>0.82</span><span>LIVE</span>
+    </div>
+  </div>
   <p>© <span id="year"></span> Danish Sayyed. Built with data, curiosity and a lot of cups of chai.</p>
 </footer>
 

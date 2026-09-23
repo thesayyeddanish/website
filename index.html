@@ -3,12 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Danish Sayyed</title>
+<title>Danish Sayyed — Senior Data Analyst</title>
 <meta name="description" content="Danish Sayyed — Senior Data Analyst in Mumbai. Real-time cricket analytics, dashboards and data solutions that hold up live.">
-<link rel="icon" href="./assets/images/logo.png">
+<link rel="icon" href="./assets/images/logo.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./assets/css/style.css">
+<script type="module" src="https://unpkg.com/[email protected]/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/[email protected]/dist/ionicons/ionicons.js"></script>
 </head>
 <body>
 
@@ -16,6 +18,7 @@
   <nav class="nav">
     <a href="#home" class="nav-brand"><span class="dot"></span> Danish Sayyed</a>
     <ul class="nav-links">
+      <li class="nav-indicator" aria-hidden="true"></li>
       <li><a href="#home" class="nav-link">Home</a></li>
       <li><a href="#about" class="nav-link">About</a></li>
       <li><a href="#career" class="nav-link">Career</a></li>
@@ -42,7 +45,7 @@
       <div class="hero-grid">
         <div data-reveal="left">
           <div class="hero-kicker"><span class="line"></span> SENIOR DATA ANALYST · MUMBAI, INDIA</div>
-          <h1>Turning raw data into<span class="accent"> decisions</span> that hold up live.</h1>
+          <h1>Turning raw data <span class="accent">into decisions</span> that hold up live.</h1>
           <p class="hero-desc">I build real-time analytics for televised cricket, dashboards that make sense of messy numbers, and data solutions that help people make better decisions.</p>
           <div class="hero-actions">
             <a href="#projects" class="btn btn-primary">View my work <ion-icon name="arrow-forward-outline"></ion-icon></a>
@@ -60,7 +63,22 @@
         </div>
 
         <div class="hero-visual" data-reveal="right">
+          <div class="data-fragments" id="hero-fragments" aria-hidden="true">
+            <span class="fragment f1">48.2</span>
+            <span class="fragment f2">SQL</span>
+            <span class="fragment f3">72.4</span>
+            <span class="fragment f4">LIVE</span>
+            <span class="fragment f5">0.83</span>
+            <span class="fragment f6">+12%</span>
+            <span class="fragment f7">DATA</span>
+            <span class="fragment f8">142.6</span>
+            <span class="fragment fragment-cricket fc1">156.4 km/h</span>
+          </div>
           <div class="hero-panel">
+            <span class="live-ring" aria-hidden="true"></span>
+            <div class="live-label" id="hero-live-label" aria-hidden="true">
+              <span class="live-dot"></span><span class="live-label-text">LIVE ANALYTICS</span>
+            </div>
             <div class="hero-panel-scribble">
               <div class="name">Danish<br>Sayyed</div>
               <svg width="60" height="20" viewBox="0 0 60 20" fill="none"><path d="M2 4C10 16 20 16 30 8C40 0 50 0 58 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
@@ -69,7 +87,7 @@
               Analytics for a smarter tomorrow
               <svg width="34" height="30" viewBox="0 0 34 30" fill="none"><path d="M4 2C4 14 8 22 22 24" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M15 21L22 24L19 17" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
-            <img class="hero-photo" src="./assets/images/danishcutout.png" alt="Danish Sayyed">
+            <img class="hero-photo" src="./assets/images/danish-cutout.png" alt="Danish Sayyed">
             <div class="hero-panel-caption">DATA<br>ANALYTICS<br>VISUALIZATION<br>REAL-TIME INSIGHTS</div>
           </div>
 
@@ -141,7 +159,8 @@
         <div class="about-col-card" data-reveal="scale" style="--i:0">
           <div class="eyebrow"><span class="line"></span> MY JOURNEY</div>
           <p class="lede-sm">From engineering to real-world impact.</p>
-          <div class="journey-list">
+          <div class="journey-list" id="journey-signal-list">
+            <span class="signal-dot" aria-hidden="true"></span>
             <div class="journey-item"><div class="ic"><ion-icon name="construct-outline"></ion-icon></div><h5>Mechanical Engineering</h5><span>Built a problem-solving mindset.</span></div>
             <div class="journey-item"><div class="ic"><ion-icon name="analytics-outline"></ion-icon></div><h5>Data Analytics</h5><span>Discovered the power of data.</span></div>
             <div class="journey-item"><div class="ic"><ion-icon name="baseball-outline"></ion-icon></div><h5>Cricket Analytics</h5><span>Turned passion into a profession.</span></div>
@@ -152,7 +171,8 @@
         <div class="about-col-card" data-reveal="scale" style="--i:1">
           <div class="eyebrow"><span class="line"></span> HOW I WORK</div>
           <p class="lede-sm">A simple approach to every problem.</p>
-          <div class="how-i-work-list">
+          <div class="how-i-work-list" id="howwork-signal-list">
+            <span class="signal-dot signal-dot-h" aria-hidden="true"></span>
             <div class="how-item"><div class="num">01</div><div><h5>Understand the problem</h5><p>Ask the right questions and get to the real context.</p></div></div>
             <div class="how-item"><div class="num">02</div><div><h5>Find the signal</h5><p>Clean, explore and analyze the data that matters.</p></div></div>
             <div class="how-item"><div class="num">03</div><div><h5>Build the solution</h5><p>Create dashboards, models or systems that solve the need.</p></div></div>
@@ -198,7 +218,7 @@
         </div>
         <div class="career-kpis" data-reveal="right">
           <div class="career-kpi"><div class="ic" style="background:var(--violet-100);color:var(--violet)"><ion-icon name="calendar-outline"></ion-icon></div><b><span data-count="6" data-suffix="+">0+</span></b><span>Years experience</span></div>
-          <div class="career-kpi"><div class="ic" style="background:#ffe8ea;color:var(--coral)"><ion-icon name="radio-outline"></ion-icon></div><b><span data-count="325" data-suffix="+">0+</span></b><span>Live matches</span></div>
+          <div class="career-kpi"><div class="ic" style="background:#ffe8ea;color:var(--coral)"><ion-icon name="radio-outline"></ion-icon></div><b><span data-count="220" data-suffix="+">0+</span></b><span>Live matches</span></div>
           <div class="career-kpi"><div class="ic" style="background:var(--cyan-100);color:var(--cyan)"><ion-icon name="bar-chart-outline"></ion-icon></div><b><span data-count="50" data-suffix="+">0+</span></b><span>Dashboards &amp; reports</span></div>
           <div class="career-kpi"><div class="ic" style="background:#fff3de;color:#c9820b"><ion-icon name="trophy-outline"></ion-icon></div><b><span data-count="44" data-suffix="+">0+</span></b><span>Projects completed</span></div>
         </div>
@@ -210,8 +230,9 @@
             <div class="panel-head-left"><div class="ic"><ion-icon name="briefcase-outline"></ion-icon></div><h3>Work Experience</h3></div>
             <span class="panel-head-note">A journey of growth, impact and learning</span>
           </div>
-          <div class="exp-timeline">
-            <div class="exp-item">
+          <div class="exp-timeline" id="career-timeline">
+            <span class="career-scanner" aria-hidden="true"></span>
+            <div class="exp-item" data-current="true">
               <span class="exp-date">Mar 2024 — Present</span>
               <div class="exp-row-head">
                 <div><h4>Data Analyst, Cricket Systems &amp; Live Analytics</h4><span class="company">Hawk-Eye Innovations</span></div>
@@ -254,14 +275,18 @@
           <div class="panel">
             <div class="panel-head"><div class="panel-head-left"><div class="ic"><ion-icon name="school-outline"></ion-icon></div><h3>Education</h3></div></div>
             <div class="edu-item">
-              <img class="exp-logo" src="./assets/images/logo.png" alt="University of Mumbai placeholder logo">
+              <div class="edu-logo-placeholder" title="Add your college logo later"><ion-icon name="school-outline"></ion-icon></div>
               <div style="flex:1"><h4>Bachelor of Engineering</h4><div class="school">University of Mumbai</div><time>July 2019</time></div>
               <span class="edu-tag">Mechanical Engg.</span>
             </div>
             <div class="edu-item">
-              <img class="exp-logo" src="./assets/images/logo.png" alt="MSBTE placeholder logo">
+              <div class="edu-logo-placeholder" title="Add your college logo later"><ion-icon name="school-outline"></ion-icon></div>
               <div style="flex:1"><h4>Diploma in Engineering</h4><div class="school">Maharashtra State Board (MSBTE)</div><time>June 2016</time></div>
               <span class="edu-tag">Engineering</span>
+            </div>
+            <div class="edu-item">
+              <div class="edu-logo-placeholder" title="Add your college logo later"><ion-icon name="school-outline"></ion-icon></div>
+              <div style="flex:1"><h4>Secondary School Certificate</h4><div class="school">Maharashtra State Board</div><time>June 2013</time></div>
             </div>
           </div>
 
@@ -332,8 +357,14 @@
         <a href="projects.html" class="view-all-link">View all <span id="project-total-count">44</span> projects <ion-icon name="arrow-forward-outline"></ion-icon></a>
       </div>
 
-      <div class="project-grid" id="featured-project-grid" data-reveal="scale">
-        <!-- Featured cards injected by script below, mirrors PROJECTS ids 0,1,2,4,6,7 -->
+      <div class="gallery-wrap" data-reveal="scale">
+        <button class="gallery-arrow gallery-prev" aria-label="Previous project"><ion-icon name="chevron-back-outline"></ion-icon></button>
+        <div class="gallery-viewport" id="gallery-viewport">
+          <div class="project-gallery" id="featured-project-grid">
+            <!-- Featured cards injected by script below, mirrors PROJECTS ids 0,1,2,4,6,7 -->
+          </div>
+        </div>
+        <button class="gallery-arrow gallery-next" aria-label="Next project"><ion-icon name="chevron-forward-outline"></ion-icon></button>
       </div>
 
       <div class="connect-strip" data-reveal="scale">
@@ -347,38 +378,37 @@
   </section>
 
   <!-- ============ TESTIMONIALS ============ -->
-<section class="section" id="testimonials">
-  <div class="wrap" data-testimonials>
-    <div class="testi-head-row">
-      <div data-reveal="left">
-        <div class="eyebrow"><span class="line"></span> WHAT PEOPLE SAY</div>
-        <h2>What it's like <span class="accent">working with me.</span></h2>
-        <p style="color:var(--ink-500);margin-top:10px;">Recommendations from colleagues and collaborators across cricket analytics, data and real-world projects.</p>
+  <section class="section" id="testimonials">
+    <div class="wrap" data-testimonials>
+      <div class="testi-head-row">
+        <div data-reveal="left">
+          <div class="eyebrow"><span class="line"></span> WHAT PEOPLE SAY</div>
+          <h2>What it's like <span class="accent">working with me.</span></h2>
+          <p style="color:var(--ink-500);margin-top:10px;">Recommendations from colleagues and collaborators across cricket analytics, data and real-world projects.</p>
+        </div>
       </div>
-      <div class="testi-stats-row" data-reveal="right">
-        <div class="testi-stat"><div class="ic"><ion-icon name="people-outline"></ion-icon></div><b><span data-count="7" data-suffix="+">0+</span></b><span>Recommendations<br>from industry peers</span></div>
-        <div class="testi-stat"><div class="ic"><ion-icon name="star-outline"></ion-icon></div><b><span data-count="100" data-suffix="%">0%</span></b><span>Would work<br>with again</span></div>
+
+      <div class="testi-train-wrap" data-reveal="scale">
+        <div class="testi-train-viewport" id="testi-viewport">
+          <div class="testi-train" id="testi-track"><!-- rendered by JS --></div>
+        </div>
+      </div>
+
+      <div class="testi-controls">
+        <button class="testi-arrow" data-testi-prev aria-label="Previous testimonial"><ion-icon name="chevron-back-outline"></ion-icon></button>
+        <div class="testi-dots"></div>
+        <button class="testi-arrow" data-testi-next aria-label="Next testimonial"><ion-icon name="chevron-forward-outline"></ion-icon></button>
+      </div>
+
+      <div class="connect-strip" data-reveal="scale" style="margin-top:36px;">
+        <div class="connect-strip-left">
+          <div class="ic"><ion-icon name="bulb-outline"></ion-icon></div>
+          <div><h5>Interested in working together?</h5><span>Let's talk about how data can create value for your team.</span></div>
+        </div>
+        <a href="#contact" class="btn btn-primary">Get in touch <ion-icon name="arrow-forward-outline"></ion-icon></a>
       </div>
     </div>
-
-    <!-- Single card container -->
-    <div class="testi-featured" data-reveal="scale"><!-- rendered by JS --></div>
-
-    <div class="testi-controls">
-      <button class="testi-arrow" data-testi-prev aria-label="Previous"><ion-icon name="chevron-back-outline"></ion-icon></button>
-      <div class="testi-dots"></div>
-      <button class="testi-arrow" data-testi-next aria-label="Next"><ion-icon name="chevron-forward-outline"></ion-icon></button>
-    </div>
-
-    <div class="connect-strip" data-reveal="scale" style="margin-top:36px;">
-      <div class="connect-strip-left">
-        <div class="ic"><ion-icon name="bulb-outline"></ion-icon></div>
-        <div><h5>Interested in working together?</h5><span>Let's talk about how data can create value for your team.</span></div>
-      </div>
-      <a href="#contact" class="btn btn-primary">Get in touch <ion-icon name="arrow-forward-outline"></ion-icon></a>
-    </div>
-  </div>
-</section>
+  </section>
 
   <!-- ============ CONTACT ============ -->
   <section class="section" id="contact">
@@ -477,6 +507,12 @@
 </main>
 
 <footer>
+  <div class="footer-stream" aria-hidden="true">
+    <div class="footer-stream-track">
+      <span>01</span><span>101</span><span>42.3</span><span>SQL</span><span>220+</span><span>Tableau</span><span>0.82</span><span>LIVE</span>
+      <span>01</span><span>101</span><span>42.3</span><span>SQL</span><span>220+</span><span>Tableau</span><span>0.82</span><span>LIVE</span>
+    </div>
+  </div>
   <p>© <span id="year"></span> Danish Sayyed. Built with data, curiosity and a lot of cups of chai.</p>
 </footer>
 
@@ -511,24 +547,7 @@
     if (!grid || typeof PROJECTS === 'undefined') return;
     const featured = PROJECTS.filter(p => p.featured);
     document.getElementById('project-total-count').textContent = PROJECTS.length;
-    grid.innerHTML = featured.map(p => `
-      <div class="project-card">
-        <div class="thumb">
-          <span class="card-tag">${p.label}</span>
-          <img src="${p.img}" alt="${p.title}" loading="lazy">
-          <div class="thumb-overlay">
-            <button class="card-view" data-preview-btn="${p.id}" aria-label="View ${p.title}"><ion-icon name="eye-outline"></ion-icon></button>
-          </div>
-        </div>
-        <div class="project-body">
-          <h3>${p.title}</h3>
-          <p>${p.desc}</p>
-          <div class="project-foot">
-            <div class="mini-tags">${p.tags.map(t => `<span class="mini-tag">${t}</span>`).join('')}</div>
-            <a href="${p.href}" target="_blank" rel="noopener" aria-label="Open ${p.title}"><ion-icon name="arrow-forward-outline"></ion-icon></a>
-          </div>
-        </div>
-      </div>`).join('');
+    grid.innerHTML = featured.map(renderProjectCard).join('');
   })();
 
   // copy buttons
@@ -542,7 +561,5 @@
     });
   });
 </script>
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
