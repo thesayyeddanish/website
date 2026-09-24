@@ -274,7 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const dot = journeyList.querySelector('.signal-dot');
     const items = [...journeyList.querySelectorAll('.journey-item')];
     watchOnce(journeyList, () => {
-      runSignal(journeyList, dot, items, (el) => el.offsetTop + 8.5, { stepMs: 420 });
+      runSignal(journeyList, dot, items, (el) => el.offsetTop + 14, { stepMs: 380 });
     });
   }
 
@@ -284,7 +284,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const dot = howList.querySelector('.signal-dot-h');
     const items = [...howList.querySelectorAll('.how-item')];
     watchOnce(howList, () => {
-      runSignal(howList, dot, items, (el) => el.offsetTop + 16, { stepMs: 420 });
+      runSignal(howList, dot, items, (el) => el.offsetTop + 14, { stepMs: 380 });
     });
   }
 
