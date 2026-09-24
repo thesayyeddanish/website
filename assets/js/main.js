@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const el = en.target;
         const target = parseFloat(el.getAttribute('data-count'));
         const suffix = el.getAttribute('data-suffix') || '';
-        const dur = 1100;
+        const dur = 1800;
         const start = performance.now();
         const tick = (now) => {
           const p = Math.min(1, (now - start) / dur);
@@ -183,8 +183,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const hfio = new IntersectionObserver((entries) => {
         entries.forEach(en => {
           if (en.isIntersecting) {
-            setTimeout(() => heroFragments.classList.add('is-converging'), 450);
-            setTimeout(() => heroFragments.classList.add('is-done'), 450 + 1250);
+            setTimeout(() => heroFragments.classList.add('is-converging'), 1450);
+            setTimeout(() => heroFragments.classList.add('is-done'), 1450 + 1250);
             hfio.disconnect();
           }
         });
@@ -213,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const lpio = new IntersectionObserver((entries) => {
         entries.forEach(en => {
           if (en.isIntersecting) {
-            if (!liveTimer) liveTimer = setInterval(cycle, 3200);
+            if (!liveTimer) liveTimer = setInterval(cycle, 4500);
           } else if (liveTimer) {
             clearInterval(liveTimer);
             liveTimer = null;
