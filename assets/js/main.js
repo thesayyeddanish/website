@@ -183,8 +183,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const hfio = new IntersectionObserver((entries) => {
         entries.forEach(en => {
           if (en.isIntersecting) {
-            setTimeout(() => heroFragments.classList.add('is-converging'), 1450);
-            setTimeout(() => heroFragments.classList.add('is-done'), 1450 + 1250);
+            setTimeout(() => heroFragments.classList.add('is-converging'), 1400);
+            setTimeout(() => heroFragments.classList.add('is-done'), 1400 + 1250);
             hfio.disconnect();
           }
         });
