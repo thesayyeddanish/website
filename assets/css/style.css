@@ -342,20 +342,20 @@ h1,h2,h3,h4{
 /* Phase 2/3: converge into the decision area and fade */
 .data-fragments.is-converging .fragment{
   animation:none;
-  transition:transform .8s var(--ease-data), opacity .55s var(--ease-data);
+  transition:transform 1.8s var(--ease-data), opacity 1.6s var(--ease-data);
   transition-delay:var(--conv-delay, 0s);
   transform:translate(-50%,-50%) scale(.3);
   opacity:0;
 }
 .data-fragments.is-converging .fragment-cricket{
-  animation:cricket-arc .95s var(--ease-data) forwards;
-  animation-delay:.32s;
+  animation:cricket-arc 1.95s var(--ease-data) forwards;
+  animation-delay:.60s;
   transition:none;
 }
 @keyframes cricket-arc{
   0%{ transform:translate(calc(-50% + var(--sx)), calc(-50% + var(--sy))); opacity:1; }
   55%{ transform:translate(calc(-50% + var(--sx) * .3), calc(-50% + var(--sy) * .3 - 34px)); opacity:1; }
-  100%{ transform:translate(-50%,-50%) scale(.2); opacity:0; }
+  100%{ transform:translate(-50%,-50%) scale(.8); opacity:0; }
 }
 .data-fragments.is-done{ display:none; }
 
