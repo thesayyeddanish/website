@@ -9,8 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./assets/css/style.css">
-<script type="module" src="https://unpkg.com/[email protected]/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/[email protected]/dist/ionicons/ionicons.js"></script>
+<script src="https://unpkg.com/[email protected]/dist/ionicons/ionicons.js"></script>
 </head>
 <body>
 
@@ -87,7 +86,7 @@
               Analytics for a smarter tomorrow
               <svg width="34" height="30" viewBox="0 0 34 30" fill="none"><path d="M4 2C4 14 8 22 22 24" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M15 21L22 24L19 17" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
-            <img class="hero-photo" src="./assets/images/danish-cutout.png" alt="Danish Sayyed">
+            <img class="hero-photo" src="./assets/images/danishcutout.png" alt="Danish Sayyed">
             <div class="hero-panel-caption">DATA<br>ANALYTICS<br>VISUALIZATION<br>REAL-TIME INSIGHTS</div>
           </div>
 
@@ -116,15 +115,22 @@
   </section>
 
   <!-- ============ ABOUT ============ -->
-  <section class="section" id="about">
+  <section class="section about-section" id="about">
     <div class="wrap">
       <div class="about-hero">
-        <div class="about-intro-card" data-reveal="left">
-          <div class="eyebrow"><span class="line"></span> ABOUT ME</div>
-          <h2>Data with context, <span class="accent">not just charts.</span></h2>
-          <p class="lede">Engineer-turned-analyst, allergic to dashboards that look pretty but say nothing.</p>
-          <p class="body-text">I'm Danish Sayyed, a Senior Data Analyst based in Mumbai. I enjoy turning messy data into clear insights, especially in cricket, sports and real-time analytics. For me, data is not just numbers — it's a way to understand what's happening and make better decisions.</p>
-          <p class="body-text">At Hawk-Eye Innovations, I've worked on 220+ live cricket matches where timing and accuracy aren't optional — when data shows up late or wrong, it's a broadcast problem, not just a bug. I started out in Mechanical Engineering, but traded machines for SQL, Python and Tableau, and now build dashboards, models and systems that actually move the needle.</p>
+        <div class="about-hero-left">
+          <div class="about-intro-card" data-reveal="left">
+            <div class="eyebrow"><span class="line"></span> ABOUT ME</div>
+            <h2>Data with context, <span class="accent">not just charts.</span></h2>
+            <p class="lede">Engineer-turned-analyst, allergic to dashboards that look pretty but say nothing.</p>
+            <p class="body-text">I'm Danish Sayyed, a Senior Data Analyst based in Mumbai. I enjoy turning messy data into clear insights, especially in cricket, sports and real-time analytics. For me, data is not just numbers — it's a way to understand what's happening and make better decisions.</p>
+          </div>
+          <div class="about-stats" data-reveal="scale">
+            <div class="stat-card"><div class="ic" style="background:#e7f0ff;color:var(--blue)"><ion-icon name="trending-up-outline"></ion-icon></div><b><span data-count="6" data-suffix="+">0+</span></b><span>Years in analytics</span></div>
+            <div class="stat-card"><div class="ic" style="background:#ffe8ea;color:var(--coral)"><ion-icon name="radio-outline"></ion-icon></div><b><span data-count="220" data-suffix="+">0+</span></b><span>Live cricket matches</span></div>
+            <div class="stat-card"><div class="ic" style="background:var(--cyan-100);color:var(--cyan)"><ion-icon name="bar-chart-outline"></ion-icon></div><b><span data-count="50" data-suffix="+">0+</span></b><span>Dashboards</span></div>
+            <div class="stat-card"><div class="ic" style="background:#fff3de;color:#c9820b"><ion-icon name="folder-outline"></ion-icon></div><b><span data-count="44" data-suffix="+">0+</span></b><span>Portfolio projects</span></div>
+          </div>
         </div>
 
         <div class="about-talk-card" data-reveal="right">
@@ -148,23 +154,16 @@
         </div>
       </div>
 
-      <div class="about-stats" data-reveal="scale">
-        <div class="stat-card"><div class="ic" style="background:#e7f0ff;color:var(--blue)"><ion-icon name="trending-up-outline"></ion-icon></div><b><span data-count="6" data-suffix="+">0+</span></b><span>Years in analytics</span></div>
-        <div class="stat-card"><div class="ic" style="background:#ffe8ea;color:var(--coral)"><ion-icon name="radio-outline"></ion-icon></div><b><span data-count="220" data-suffix="+">0+</span></b><span>Live cricket matches</span></div>
-        <div class="stat-card"><div class="ic" style="background:var(--cyan-100);color:var(--cyan)"><ion-icon name="bar-chart-outline"></ion-icon></div><b><span data-count="50" data-suffix="+">0+</span></b><span>Dashboards</span></div>
-        <div class="stat-card"><div class="ic" style="background:#fff3de;color:#c9820b"><ion-icon name="folder-outline"></ion-icon></div><b><span data-count="44" data-suffix="+">0+</span></b><span>Portfolio projects</span></div>
-      </div>
-
       <div class="about-cols">
         <div class="about-col-card" data-reveal="scale" style="--i:0">
           <div class="eyebrow"><span class="line"></span> MY JOURNEY</div>
           <p class="lede-sm">From engineering to real-world impact.</p>
           <div class="journey-list" id="journey-signal-list">
             <span class="signal-dot" aria-hidden="true"></span>
-            <div class="journey-item"><div class="ic"><ion-icon name="construct-outline"></ion-icon></div><h5>Mechanical Engineering</h5><span>Built a problem-solving mindset.</span></div>
-            <div class="journey-item"><div class="ic"><ion-icon name="analytics-outline"></ion-icon></div><h5>Data Analytics</h5><span>Discovered the power of data.</span></div>
-            <div class="journey-item"><div class="ic"><ion-icon name="baseball-outline"></ion-icon></div><h5>Cricket Analytics</h5><span>Turned passion into a profession.</span></div>
-            <div class="journey-item"><div class="ic"><ion-icon name="briefcase-outline"></ion-icon></div><h5>Senior Data Analyst</h5><span>Now building solutions at scale.</span></div>
+            <div class="journey-item"><div class="ic"><ion-icon name="construct-outline"></ion-icon></div><div><h5>Mechanical Engineering</h5><span>Built a problem-solving mindset.</span></div></div>
+            <div class="journey-item"><div class="ic"><ion-icon name="analytics-outline"></ion-icon></div><div><h5>Data Analytics</h5><span>Discovered the power of data.</span></div></div>
+            <div class="journey-item"><div class="ic"><ion-icon name="baseball-outline"></ion-icon></div><div><h5>Cricket Analytics</h5><span>Turned passion into a profession.</span></div></div>
+            <div class="journey-item"><div class="ic"><ion-icon name="briefcase-outline"></ion-icon></div><div><h5>Senior Data Analyst</h5><span>Now building solutions at scale.</span></div></div>
           </div>
         </div>
 
@@ -191,24 +190,11 @@
           </div>
         </div>
       </div>
-
-      <div class="about-bottom" data-reveal="scale">
-        <div class="quote-card">
-          <span class="q-mark">&ldquo;</span>
-          <p>Good data doesn't just show what happened, it helps you decide what to do next.</p>
-          <span class="sig">— Danish Sayyed</span>
-        </div>
-        <div class="learning-card">
-          <div class="ic"><ion-icon name="book-outline"></ion-icon></div>
-          <div><h5>Always learning</h5><span>Exploring new tools, better methods, and more interesting datasets.</span></div>
-          <ion-icon name="arrow-forward-outline"></ion-icon>
-        </div>
-      </div>
     </div>
   </section>
 
   <!-- ============ CAREER ============ -->
-  <section class="section" id="career">
+  <section class="section career-section" id="career">
     <div class="wrap">
       <div class="career-head-row">
         <div data-reveal="left">
@@ -238,11 +224,7 @@
                 <div><h4>Data Analyst, Cricket Systems &amp; Live Analytics</h4><span class="company">Hawk-Eye Innovations</span></div>
                 <div class="exp-badges"><span>Live</span><span>Real-time</span><span>Broadcast</span></div>
               </div>
-              <ul>
-                <li>Work across live broadcasts, DRS, UltraEdge and ball-tracking analytics.</li>
-                <li>Ensure data accuracy and real-time insights in high-pressure environments.</li>
-                <li>Covered 220+ live matches including IPL, international series and global events.</li>
-              </ul>
+              <p class="exp-summary">Work across live broadcasts, DRS, UltraEdge and ball-tracking analytics · Ensure data accuracy in high-pressure environments · Covered 220+ live matches including IPL and international series.</p>
             </div>
             <div class="exp-item">
               <span class="exp-date">Dec 2021 — Feb 2024</span>
@@ -250,11 +232,7 @@
                 <div><h4>Data Analyst</h4><span class="company">Intelligent Cricket</span></div>
                 <div class="exp-badges"><span>Data</span><span>Analytics</span><span>Sports</span></div>
               </div>
-              <ul>
-                <li>Collected and analyzed ball-by-ball data for international and franchise events (T20 WC, MLC, WPL, etc.).</li>
-                <li>Built performance analytics dashboards and data models.</li>
-                <li>Supported teams with actionable insights for players, analysts and coaches.</li>
-              </ul>
+              <p class="exp-summary">Collected and analyzed ball-by-ball data for international and franchise events (T20 WC, MLC, WPL) · Built performance dashboards and data models · Supported teams with actionable insights.</p>
             </div>
             <div class="exp-item">
               <span class="exp-date">Nov 2019 — Nov 2021</span>
@@ -262,16 +240,12 @@
                 <div><h4>Junior Data Analyst</h4><span class="company">Allied Aero Systems</span></div>
                 <div class="exp-badges"><span>Operations</span><span>Analytics</span></div>
               </div>
-              <ul>
-                <li>Tracked project timelines, costs and operational performance.</li>
-                <li>Built dashboards to identify issues early and bring structure to data usage.</li>
-                <li>Worked closely with cross-functional teams to support decision making.</li>
-              </ul>
+              <p class="exp-summary">Tracked project timelines, costs and operational performance · Built dashboards to identify issues early · Worked closely with cross-functional teams on decision making.</p>
             </div>
           </div>
         </div>
 
-        <div data-reveal="right" style="display:flex;flex-direction:column;gap:18px;">
+        <div data-reveal="right" style="display:flex;flex-direction:column;gap:10px;">
           <div class="panel">
             <div class="panel-head"><div class="panel-head-left"><div class="ic"><ion-icon name="school-outline"></ion-icon></div><h3>Education</h3></div></div>
             <div class="edu-item">
@@ -305,10 +279,10 @@
       <div class="panel" data-reveal="scale">
         <div class="panel-head"><div class="panel-head-left"><div class="ic"><ion-icon name="construct-outline"></ion-icon></div><h3>Skills &amp; Tools</h3></div><span class="panel-head-note">The toolkit behind the work</span></div>
         <div class="career-skills-grid">
-          <div class="skill-row"><div><b><ion-icon name="bar-chart-outline"></ion-icon> Analytics &amp; BI</b><div class="pill-row"><span class="skill-pill">Tableau</span><span class="skill-pill">Power BI</span><span class="skill-pill">Excel</span></div></div></div>
-          <div class="skill-row"><div><b><ion-icon name="code-slash-outline"></ion-icon> Programming &amp; Data</b><div class="pill-row"><span class="skill-pill">Python</span><span class="skill-pill">SQL</span></div></div></div>
-          <div class="skill-row"><div><b><ion-icon name="pie-chart-outline"></ion-icon> Visualization</b><div class="pill-row"><span class="skill-pill">Tableau</span><span class="skill-pill">Power BI</span><span class="skill-pill">Data Storytelling</span></div></div></div>
-          <div class="skill-row"><div><b><ion-icon name="git-network-outline"></ion-icon> Domain</b><div class="pill-row"><span class="skill-pill">Cricket Analytics</span><span class="skill-pill">Real-time Analytics</span><span class="skill-pill">Broadcast</span></div></div></div>
+          <div class="skill-row"><div><b><ion-icon name="bar-chart-outline"></ion-icon> Analytics &amp; BI</b><div class="pill-row"><span class="skill-pill">Tableau</span><span class="skill-pill">Power BI</span><span class="skill-pill">Excel</span><span class="skill-pill">DAX</span><span class="skill-pill">Alteryx</span><span class="skill-pill">Google Sheets</span></div></div></div>
+          <div class="skill-row"><div><b><ion-icon name="code-slash-outline"></ion-icon> Programming &amp; Data</b><div class="pill-row"><span class="skill-pill">Python</span><span class="skill-pill">SQL</span><span class="skill-pill">Pandas</span><span class="skill-pill">NumPy</span><span class="skill-pill">Git</span><span class="skill-pill">Streamlit</span></div></div></div>
+          <div class="skill-row"><div><b><ion-icon name="pie-chart-outline"></ion-icon> Visualization</b><div class="pill-row"><span class="skill-pill">Tableau</span><span class="skill-pill">Power BI</span><span class="skill-pill">Matplotlib</span><span class="skill-pill">Seaborn</span><span class="skill-pill">Data Storytelling</span></div></div></div>
+          <div class="skill-row"><div><b><ion-icon name="git-network-outline"></ion-icon> Other Tools</b><div class="pill-row"><span class="skill-pill">Jira</span><span class="skill-pill">Confluence</span><span class="skill-pill">MS Office</span><span class="skill-pill">MySQL</span><span class="skill-pill">BigQuery</span><span class="skill-pill">Snowflake</span></div></div></div>
         </div>
       </div>
 
