@@ -274,7 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const dot = journeyList.querySelector('.signal-dot');
     const items = [...journeyList.querySelectorAll('.journey-item')];
     watchOnce(journeyList, () => {
-      runSignal(journeyList, dot, items, (el) => el.offsetTop + 14, { stepMs: 380 });
+      runSignal(journeyList, dot, items, (el) => el.offsetTop + 14, { stepMs: 1000 });
     });
   }
 
@@ -284,7 +284,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const dot = howList.querySelector('.signal-dot-h');
     const items = [...howList.querySelectorAll('.how-item')];
     watchOnce(howList, () => {
-      runSignal(howList, dot, items, (el) => el.offsetTop + 14, { stepMs: 380 });
+      runSignal(howList, dot, items, (el) => el.offsetTop + 14, { stepMs: 1000 });
     });
   }
 
@@ -295,7 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const items = [...careerTimeline.querySelectorAll('.exp-item')];
     watchOnce(careerTimeline, () => {
       runSignal(careerTimeline, dot, items, (el) => el.offsetTop + 10.5, {
-        stepMs: 520,
+        stepMs: 1520,
         onSettle: (its) => its.forEach(el => { if (el.dataset.current === 'true') el.classList.add('is-current'); })
       });
     }, 0.15);
@@ -775,15 +775,18 @@ document.addEventListener('DOMContentLoaded', () => {
           headers: { 'Accept': 'application/json' }
         });
         if (res.ok) {
-          submitBtn.classList.remove('is-loading');
-          submitBtn.classList.add('is-done');
-          flyToMailIcon();
-          form.reset();
-          if (formCard) formCard.classList.remove('has-focus');
-          setTimeout(() => submitBtn.classList.remove('is-done'), 3500);
-        } else {
-          throw new Error('Form submission failed');
-        }
+            submitBtn.classList.remove('is-loading');
+            submitBtn.classList.add('is-done');
+
+           // Let the success state register visually before the plane launches.
+           setTimeout(() => {
+             flyToMailIcon();
+           }, 150);
+
+           form.reset();
+           if (formCard) formCard.classList.remove('has-focus');
+           setTimeout(() => submitBtn.classList.remove('is-done'), 6000);
+         }
       } catch (err) {
         submitBtn.classList.remove('is-loading');
         submitBtn.classList.add('is-error');
