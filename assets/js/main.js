@@ -74,10 +74,14 @@ document.addEventListener('DOMContentLoaded', () => {
   if (sections.length && navLinks.length) {
     let currentId = null;
     const setActive = (id) => {
-      if (id === currentId) return;
-      currentId = id;
+      // Testimonials sits between Projects and Contact but is conceptually
+      // part of the About story, and has no nav link of its own — fold it
+      // into "about" so the nav never goes blank while scrolling through it.
+      const navId = id === 'testimonials' ? 'about' : id;
+      if (navId === currentId) return;
+      currentId = navId;
       navLinks.forEach(a => {
-        a.classList.toggle('active', a.getAttribute('href') === `#${id}` || a.getAttribute('href') === `index.html#${id}`);
+        a.classList.toggle('active', a.getAttribute('href') === `#${navId}` || a.getAttribute('href') === `index.html#${navId}`);
       });
       moveIndicator(true);
     };
@@ -173,23 +177,49 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* =========================================================
-     HERO: "raw data → decision" fragment convergence (once)
+     HERO SEQUENCE: panel slides in → photo fades in →
+     KPI chips animate out from the panel's center → data
+     fragments converge into the middle. Runs once.
   ========================================================= */
+  const heroPanelEl = document.querySelector('.hero-panel');
+  const heroPhotoEl = document.querySelector('.hero-photo');
+  const heroChips = [...document.querySelectorAll('.float-chip')];
   const heroFragments = document.getElementById('hero-fragments');
-  if (heroFragments) {
+  const heroVisual = document.querySelector('.hero-visual');
+
+  if (heroVisual) {
     if (prefersReducedMotion) {
-      heroFragments.classList.add('is-done');
+      heroPanelEl?.classList.add('is-in');
+      heroPhotoEl?.classList.add('is-in');
+      heroChips.forEach(c => c.classList.add('is-in'));
+      heroFragments?.classList.add('is-done');
     } else {
-      const hfio = new IntersectionObserver((entries) => {
+      const heroIO = new IntersectionObserver((entries) => {
         entries.forEach(en => {
-          if (en.isIntersecting) {
-            setTimeout(() => heroFragments.classList.add('is-converging'), 1400);
-            setTimeout(() => heroFragments.classList.add('is-done'), 1400 + 1250);
-            hfio.disconnect();
+          if (!en.isIntersecting) return;
+          heroIO.disconnect();
+
+          // 1. Panel slides in from the right.
+          heroPanelEl?.classList.add('is-in');
+
+          // 2. Picture fades in shortly after.
+          setTimeout(() => heroPhotoEl?.classList.add('is-in'), 450);
+
+          // 3. KPI chips animate outward from the panel's center.
+          const chipStart = 950;
+          heroChips.forEach((chip, i) => {
+            setTimeout(() => chip.classList.add('is-in'), chipStart + i * 160);
+          });
+
+          // 4. Data fragments converge slowly into the middle, last.
+          if (heroFragments) {
+            const fragStart = chipStart + heroChips.length * 160 + 500;
+            setTimeout(() => heroFragments.classList.add('is-converging'), fragStart);
+            setTimeout(() => heroFragments.classList.add('is-done'), fragStart + 2600);
           }
         });
       }, { threshold: 0.4 });
-      hfio.observe(heroFragments);
+      heroIO.observe(heroVisual);
     }
   }
 
@@ -330,86 +360,109 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* =========================================================
-     FEATURED PROJECTS — horizontal "data gallery"
+     FEATURED PROJECTS — continuous "data train"
+     Same mechanism as the testimonials train: cards drift slowly
+     right-to-left, loop seamlessly via one cloned copy, and pause on
+     hover/touch/focus/drag. No wheel hijacking — normal page scroll
+     is never intercepted here.
   ========================================================= */
   const galleryViewport = document.getElementById('gallery-viewport');
-  if (galleryViewport) {
+  if (galleryViewport && typeof PROJECTS !== 'undefined') {
     const track = document.getElementById('featured-project-grid');
-    const prevBtn = document.querySelector('.gallery-prev');
-    const nextBtn = document.querySelector('.gallery-next');
-    let rafPending = false;
+    const featured = PROJECTS.filter(p => p.featured);
 
-    const updateCenter = () => {
-      rafPending = false;
-      const cards = [...track.children];
-      if (!cards.length) return;
-      const viewportCenter = galleryViewport.getBoundingClientRect().left + galleryViewport.clientWidth / 2;
-      let closest = null, closestDist = Infinity;
-      cards.forEach(card => {
-        const r = card.getBoundingClientRect();
-        const dist = Math.abs((r.left + r.width / 2) - viewportCenter);
-        if (dist < closestDist) { closestDist = dist; closest = card; }
-      });
-      cards.forEach(c => c.classList.toggle('is-center', c === closest));
-    };
-    const queueUpdate = () => { if (!rafPending) { rafPending = true; requestAnimationFrame(updateCenter); } };
+    if (featured.length && track) {
+      const loopCopies = prefersReducedMotion ? 1 : 2;
+      let html = '';
+      for (let c = 0; c < loopCopies; c++) html += featured.map(renderProjectCard).join('');
+      track.innerHTML = html;
 
-    galleryViewport.addEventListener('scroll', queueUpdate, { passive: true });
-    window.addEventListener('resize', queueUpdate);
-    // Initial pass once cards exist (they're injected by an inline script below).
-    setTimeout(updateCenter, 60);
-    setTimeout(updateCenter, 400);
-
-    // Wheel: map vertical wheel/trackpad movement to horizontal scroll.
-    galleryViewport.addEventListener('wheel', (e) => {
-      if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return; // already horizontal, let it be
-      e.preventDefault();
-      galleryViewport.scrollLeft += e.deltaY;
-    }, { passive: false });
-
-    // Drag-to-scroll for mouse users (touch already scrolls natively).
-    // Only engage once real movement is detected, so a plain click on a
-    // card/button still fires normally instead of being hijacked by capture.
-    if (!isTouch) {
-      let isDown = false, dragging = false, startX = 0, startScroll = 0;
-      track.addEventListener('pointerdown', (e) => {
-        isDown = true;
-        dragging = false;
-        startX = e.clientX;
-        startScroll = galleryViewport.scrollLeft;
-      });
-      track.addEventListener('pointermove', (e) => {
-        if (!isDown) return;
-        const delta = e.clientX - startX;
-        if (!dragging && Math.abs(delta) > 6) {
-          dragging = true;
-          track.classList.add('is-dragging');
-          track.setPointerCapture(e.pointerId);
-        }
-        if (dragging) galleryViewport.scrollLeft = startScroll - delta;
-      });
-      const endDrag = (e) => {
-        isDown = false;
-        if (dragging) {
-          dragging = false;
-          track.classList.remove('is-dragging');
-          try { track.releasePointerCapture(e.pointerId); } catch (err) { /* noop */ }
-        }
+      const setCount = featured.length;
+      let oneSetWidth = 0;
+      const measure = () => {
+        const firstCards = [...track.children].slice(0, setCount);
+        if (!firstCards.length) return;
+        const last = firstCards[firstCards.length - 1];
+        const gap = 22;
+        oneSetWidth = (last.offsetLeft + last.offsetWidth) - firstCards[0].offsetLeft + gap;
       };
-      track.addEventListener('pointerup', endDrag);
-      track.addEventListener('pointerleave', endDrag);
-    }
 
-    const scrollByCard = (dir) => {
-      const card = track.querySelector('.project-card');
-      const step = card ? card.getBoundingClientRect().width + 22 : 300;
-      galleryViewport.scrollBy({ left: step * dir, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
-    };
-    prevBtn?.addEventListener('click', () => scrollByCard(-1));
-    nextBtn?.addEventListener('click', () => scrollByCard(1));
+      let paused = false;
+      let pauseTimer = null;
+      const pause = () => { paused = true; };
+      const resumeSoon = (delay = 900) => {
+        clearTimeout(pauseTimer);
+        pauseTimer = setTimeout(() => { syncScrollPos(); paused = false; }, delay);
+      };
+
+      galleryViewport.addEventListener('mouseenter', pause);
+      galleryViewport.addEventListener('mouseleave', () => resumeSoon(200));
+      galleryViewport.addEventListener('touchstart', pause, { passive: true });
+      galleryViewport.addEventListener('touchend', () => resumeSoon(1200), { passive: true });
+      track.addEventListener('focusin', pause);
+      track.addEventListener('focusout', () => resumeSoon(200));
+
+      // Drag-to-scroll for mouse users (touch already scrolls natively).
+      // Only engages once real movement is detected, so a plain click on
+      // a card/button still fires normally instead of being hijacked.
+      if (!isTouch) {
+        let isDown = false, dragging = false, startX = 0, startScroll = 0;
+        track.addEventListener('pointerdown', (e) => {
+          isDown = true; dragging = false;
+          startX = e.clientX; startScroll = galleryViewport.scrollLeft;
+          pause();
+        });
+        track.addEventListener('pointermove', (e) => {
+          if (!isDown) return;
+          const delta = e.clientX - startX;
+          if (!dragging && Math.abs(delta) > 6) { dragging = true; galleryViewport.classList.add('is-dragging'); }
+          if (dragging) galleryViewport.scrollLeft = startScroll - delta;
+        });
+        const endDrag = () => { isDown = false; dragging = false; galleryViewport.classList.remove('is-dragging'); resumeSoon(700); };
+        track.addEventListener('pointerup', endDrag);
+        track.addEventListener('pointerleave', endDrag);
+      }
+
+      let rafId = null;
+      const speed = 0.35; // px per frame — slow, calm drift
+      let scrollPos = 1; // float accumulator — scrollLeft itself rounds to an integer
+
+      const tick = () => {
+        if (!paused && oneSetWidth > 0) {
+          scrollPos += speed;
+          if (scrollPos >= oneSetWidth) scrollPos -= oneSetWidth;
+          galleryViewport.scrollLeft = scrollPos;
+        }
+        rafId = requestAnimationFrame(tick);
+      };
+
+      const syncScrollPos = () => { scrollPos = galleryViewport.scrollLeft; };
+
+      const start = () => {
+        measure();
+        galleryViewport.scrollLeft = 1;
+        scrollPos = 1;
+        if (!prefersReducedMotion) rafId = requestAnimationFrame(tick);
+      };
+      setTimeout(start, 80);
+      window.addEventListener('resize', () => measure());
+
+      // Pause the loop while off-screen (performance).
+      const galleryIO = new IntersectionObserver((entries) => {
+        entries.forEach(en => {
+          if (prefersReducedMotion) return;
+          if (en.isIntersecting) {
+            if (!rafId) rafId = requestAnimationFrame(tick);
+          } else if (rafId) {
+            cancelAnimationFrame(rafId);
+            rafId = null;
+          }
+        });
+      }, { threshold: 0.05 });
+      galleryIO.observe(galleryViewport);
+    }
   }
 
-  /* =========================================================
   /* =========================================================
      PROJECT PREVIEW MODAL
      Requires PROJECTS array (assets/js/projects-data.js)
@@ -555,7 +608,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <h4>${t.name}</h4>
             <div class="role">${t.role}</div>
           </div>
-          <a class="testi-linkedin" href="https://www.linkedin.com/in/thesayyeddanish" target="_blank" rel="noopener" aria-label="LinkedIn"><ion-icon name="logo-linkedin"></ion-icon></a>
+          <a class="testi-linkedin" href="${t.linkedin || 'https://www.linkedin.com/in/thesayyeddanish'}" target="_blank" rel="noopener" aria-label="LinkedIn"><ion-icon name="logo-linkedin"></ion-icon></a>
         </div>
         <div class="testi-tags">${t.tags.map(tag => `<span>${tag}</span>`).join('')}</div>
       </div>`;
